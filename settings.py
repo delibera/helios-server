@@ -5,16 +5,6 @@ import sys
 import json
 import os
 
-import environ
-
-# Read in secrets from .env file
-env = environ.Env()
-environ.Env.read_env()  
-
-DBPWD = env('DBPWD')
-GOOGLESECRET = env('GOOGLESECRET')
-GOOGLEID = env('GOOGLEID')
-
 TESTING = 'test' in sys.argv
 
 # go through environment variables and override them
@@ -46,18 +36,18 @@ SHOW_LOGIN_OPTIONS = (get_from_env('SHOW_LOGIN_OPTIONS', '1') == '1')
 SHOW_USER_INFO = (get_from_env('SHOW_USER_INFO', '1') == '1')
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'helios',
-        'CONN_MAX_AGE': 600,
-    },
+  'default': {
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'NAME': 'helios',
+      'CONN_MAX_AGE': 600,
+  },
 }
 
 # override if we have an env variable
 if get_from_env('DATABASE_URL', None):
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+  import dj_database_url
+  DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+  DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -98,6 +88,7 @@ SECRET_KEY = get_from_env('SECRET_KEY', 'replaceme')
 #More info: https://docs.djangoproject.com/en/1.7/ref/settings/#allowed-hosts (same for 1.6)
 
 ALLOWED_HOSTS = get_from_env('ALLOWED_HOSTS', 'localhost').split(",")
+ALLOWED_HOSTS = ['votacityzink.herokuapp.com']
 
 # Secure Stuff
 if get_from_env('SSL', '0') == '1':
@@ -188,7 +179,8 @@ LOGOUT_ON_CONFIRMATION = True
 
 # The two hosts are here so the main site can be over plain HTTP
 # while the voting URLs are served over SSL.
-URL_HOST = get_from_env("URL_HOST", "http://localhost:8000").rstrip("/")
+# URL_HOST = get_from_env("URL_HOST", "http://localhost:8000").rstrip("/")
+URL_HOST = get_from_env("URL_HOST", "https://votacityzink.herokuapp.com").rstrip("/")
 
 # IMPORTANT: you should not change this setting once you've created
 # elections, as your elections' cast_url will then be incorrect.
@@ -226,8 +218,8 @@ AUTH_DEFAULT_SYSTEM = get_from_env('AUTH_DEFAULT_SYSTEM', get_from_env('AUTH_DEF
 
 
 # google
-GOOGLE_CLIENT_ID = get_from_env('GOOGLE_CLIENT_ID', GOOGLEID)
-GOOGLE_CLIENT_SECRET = get_from_env('GOOGLE_CLIENT_SECRET', GOOGLESECRET)
+GOOGLE_CLIENT_ID = os.environ['GOOGLEID']
+GOOGLE_CLIENT_SECRET = os.environ['GOOGLESECRET']
 
 # facebook
 FACEBOOK_APP_ID = get_from_env('FACEBOOK_APP_ID','')
