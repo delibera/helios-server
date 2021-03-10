@@ -244,7 +244,12 @@ Your voter alias is {{voter.alias}}.
 {% if eligible_p %}
 Eres elegible para votar en estas elecciones.
 {% else %}
-<em>no eres elegible</em> para votar en este {{election.election_type}}.
+{% if election.election_type == "referendum" %}
+  <em>no eres elegible</em> para votar en este {{election.election_type}}.
+{% endif %}
+{% if election.election_type == "elecciones" %}
+  <em>no eres elegible</em> para votar en estas {{election.election_type}}.
+{% endif %}
 {% endif %}
 {% else %}
 <em>no eres elegible</em> para votar en este {{election.election_type}}.
@@ -274,9 +279,9 @@ Anyone can vote in this election.
 {% endif %}
 
 <div style="background: lightyellow; padding:5px; padding-left: 10px; margin-top: 15px; border: 1px solid #aaa; width: 720px;" class="round">
-<a href="#" onclick="$('#auditbody').slideToggle(250);">Audit Info</a>
+<a href="#" onclick="$('#auditbody').slideToggle(250);">Información de Auditoría</a>
 <div id="auditbody" style="display:none;">
-<br />Election URL:<br />
+<br />URL de las Elecciones:<br />
 <tt style="font-size: 1.2em;"><a href="{{election.url}}">{{election.url}}</a></tt>
 
 {% if election.frozen_at %}
@@ -300,7 +305,7 @@ Anyone can vote in this election.
 
 {% if not election.voting_has_started %}
 <p style="font-size: 1.2em;">
-  <a href="{{SECURE_URL_HOST}}/booth/vote.html?election_url={% url "election@home" election.uuid %}">preview booth</a>
+  <a href="{{SECURE_URL_HOST}}/booth/vote.html?election_url={% url "election@home" election.uuid %}">cabina de vista previa</a>
 </p>
 {% endif %}  
 

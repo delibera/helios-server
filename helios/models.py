@@ -381,14 +381,14 @@ class Election(HeliosModel):
     if self.questions is None or len(self.questions) == 0:
       issues.append(
         {'type': 'questions',
-         'action': "add questions to the ballot"}
+         'action': "añade preguntas a la papeleta"}
         )
   
     trustees = Trustee.get_by_election(self)
     if len(trustees) == 0:
       issues.append({
           'type': 'trustees',
-          'action': "add at least one trustee"
+          'action': "añade al menos un fideicomisario"
           })
 
     for t in trustees:
@@ -401,7 +401,7 @@ class Election(HeliosModel):
     if self.voter_set.count() == 0 and not self.openreg:
       issues.append({
           "type" : "voters",
-          "action" : 'enter your voter list (or open registration to the public)'
+          "action" : 'introduce tu lista de votantes (o abre el registro al público)'
           })
 
     return issues    
