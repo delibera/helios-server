@@ -252,7 +252,12 @@ Eres elegible para votar en estas elecciones.
 {% endif %}
 {% endif %}
 {% else %}
-<em>no eres elegible</em> para votar en este {{election.election_type}}.
+{% if election.election_type == "referendum" %}
+  <em>no eres elegible</em> para votar en este {{election.election_type}}.
+{% endif %}
+{% if election.election_type == "elecciones" %}
+  <em>no eres elegible</em> para votar en estas {{election.election_type}}.
+{% endif %}
 <br />
 {% endif %}
 {% endif %}
