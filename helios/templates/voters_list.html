@@ -5,11 +5,11 @@
   <h3 class="title">{{election.name}} &mdash; Voters and Ballot Tracking Center <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">back to election</a>]</span></h3>
 
 <p>
-<b>Who can vote?</b>
+<b>¿Quién puede votar?</b>
 {% if election.openreg %}
 {{election.pretty_eligibility|safe}}
 {% else %}
-<em>Only the voters listed here</em>.
+<em>Solo los votantes listados aquí</em>.
 {% endif %}
 </p>
 
@@ -17,11 +17,11 @@
 {% if election.private_p %}
 <em>Your election is marked private, which means you cannot open registration up more widely</em>.<br />
 {% else %}
-You can change this setting:
+Puedes cambiar esta configuración:
 <form method="post" action="{% url "election@voters@eligibility" election.uuid %}">
 <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
-<input type="radio" name="eligibility" value="openreg" {% if election.openreg and not election.eligibility %}CHECKED{% endif %} /> anyone can vote<br />
-<input type="radio" name="eligibility" value="closedreg" {% if not election.openreg %}CHECKED{% endif %} /> only voters listed explicitly below can vote<br />
+<input type="radio" name="eligibility" value="openreg" {% if election.openreg and not election.eligibility %}CHECKED{% endif %} /> cualquiera puede votar<br />
+<input type="radio" name="eligibility" value="closedreg" {% if not election.openreg %}CHECKED{% endif %} /> solo los votantes listados explícitamente abajo pueden votar<br />
 {% if categories %}
 <input type="radio" name="eligibility" value="limitedreg" {% if election.eligibility %}CHECKED{% endif %} /> only voters who are members of 
 <select name="category_id">
@@ -31,13 +31,13 @@ You can change this setting:
 </select>
 <br />
 {% endif %}
-<input type="submit" value="update" />
+<input type="submit" value="actualizar" />
 </form>
 {% endif %}
 {% endif %}
 
 {% if email_voters and election.frozen_at and admin_p %}
-<p><a class="button" href="{% url "election@voters@email" election.uuid %}">email voters</a></p>
+<p><a class="button" href="{% url "election@voters@email" election.uuid %}">email de los votantes</a></p>
 {% endif %}
 
 {% if election.num_voters > 20 %}
@@ -45,7 +45,7 @@ You can change this setting:
 {% if q %}
 <p><em>searching for <u>{{q}}</u>.</em> [<a href="?">clear search</a>]</p>
 {% else %}
-<form method="get" action="{% url "election@voters@list-pretty" election.uuid %}"><b>search</b>: <input type="text" name="q" /> <input type="submit" value="search" /></form>
+<form method="get" action="{% url "election@voters@list-pretty" election.uuid %}"><b>buscar</b>: <input type="text" name="q" /> <input type="submit" value="search" /></form>
 {% endif %}
 </p>
 {% endif %}
@@ -54,7 +54,7 @@ You can change this setting:
 <!-- Add a Voter: WORK HERE-->
 {% if upload_p and not election.openreg %}
 <p>
-<a class="button" href="{% url "election@voters@upload" election_uuid=election.uuid %}">bulk upload voters</a>
+<a class="button" href="{% url "election@voters@upload" election_uuid=election.uuid %}">carga masiva de votantes</a>
 </p>
 
 {% if voter_files %}
@@ -150,7 +150,7 @@ Voters {{voters_page.start_index}} - {{voters_page.end_index}} (of {{total_voter
 
 {% else %}
 <br /><br />
-<em>no voters.</em>
+<em>no hay votantes.</em>
 {% endif %}
 
 {% endblock %}

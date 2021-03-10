@@ -105,7 +105,7 @@
 {% if not election.frozen_at %}
 {% if election.issues_before_freeze %}
 {% for issue in election.issues_before_freeze %}
-{{issue.action}}{% if forloop.last %}{% else %}, and{% endif %}<br />
+{{issue.action}}{% if forloop.last %}{% else %}, y{% endif %}<br />
 {% endfor %}
 {% else %}
 <a href="{% url "election@freeze" election.uuid %}">freeze ballot and open election.</a>
