@@ -26,12 +26,22 @@
 {% if admin_p %}
   {% if not election.private_p %}
     {% if election.featured_p %}
-      este {{election.election_type}} está destacado en la página principal.
+      {% if election.election_type == "referendum" %}
+        este {{election.election_type}} está destacado en la página principal.
+      {% endif %}
+      {% if election.election_type == "elecciones" %}
+        estas {{election.election_type}} están destacadas en la página principal.
+      {% endif %}
       {% if can_feature_p %}
         [<a href="{% url "election@set-featured" election.uuid %}?featured_p=0">quitar de destacados</a>]
       {% endif %}
     {% else %}
-      estas {{election.election_type}} <u>no</u> están destacadas en la página principal.
+      {% if election.election_type == "elecciones" %}
+        estas {{election.election_type}} <u>no</u> están destacadas en la página principal.
+      {% endif %}
+      {% if election.election_type == "referendum" %}
+        este {{election.election_type}} <u>no</u> está destacado en la página principal.
+      {% endif %}
       {% if can_feature_p %}
         [<a href="{% url "election@set-featured" election.uuid %}?featured_p=1">destacar</a>]
       {% endif %}
