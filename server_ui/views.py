@@ -26,6 +26,7 @@ def home(request):
   
   user = get_user(request)
   create_p = can_create_election(request)
+  output = _('NoFeatured')
 
   if create_p:
     elections_administered = Election.get_by_user_as_admin(user, archived_p=False, limit=5)
@@ -44,7 +45,7 @@ def home(request):
 
   login_box = auth_views.login_box_raw(request, return_url="/", auth_systems=auth_systems)
 
-  return render_template(request, "index", {'elections': featured_elections,
+  return render_template(output, "index", {'elections': featured_elections,
                                             'elections_administered' : elections_administered,
                                             'elections_voted' : elections_voted,
                                             'create_p':create_p,

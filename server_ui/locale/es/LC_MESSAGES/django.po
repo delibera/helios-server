@@ -10,4 +10,6 @@ msgstr "Sobre Helios Voting"
 msgid "AboutHelios"
 msgstr "Helios es una organización imparcial liderada por"
 
-Helios is a non-partisan organization led by
+#: server_ui/templates/index.html:50
+msgid "NoFeatured"
+msgstr "No hay elecciones destacadas por ahora"
