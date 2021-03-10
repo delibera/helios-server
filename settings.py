@@ -7,6 +7,9 @@ import os
 
 TESTING = 'test' in sys.argv
 
+CELERY_BROKER_URL = os.environ['CLOUDAMQP_URL']
+BROKER_URL = os.environ['CLOUDAMQP_URL']
+
 # go through environment variables and override them
 def get_from_env(var, default):
     if not TESTING and var in os.environ:
