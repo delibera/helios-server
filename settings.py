@@ -88,7 +88,7 @@ SECRET_KEY = get_from_env('SECRET_KEY', 'replaceme')
 #More info: https://docs.djangoproject.com/en/1.7/ref/settings/#allowed-hosts (same for 1.6)
 
 ALLOWED_HOSTS = get_from_env('ALLOWED_HOSTS', 'localhost').split(",")
-ALLOWED_HOSTS = ['votacityzink.herokuapp.com']
+ALLOWED_HOSTS = ['votacitizink.herokuapp.com']
 
 # Secure Stuff
 if get_from_env('SSL', '0') == '1':
@@ -180,7 +180,7 @@ LOGOUT_ON_CONFIRMATION = True
 # The two hosts are here so the main site can be over plain HTTP
 # while the voting URLs are served over SSL.
 # URL_HOST = get_from_env("URL_HOST", "http://localhost:8000").rstrip("/")
-URL_HOST = get_from_env("URL_HOST", "https://votacityzink.herokuapp.com").rstrip("/")
+URL_HOST = get_from_env("URL_HOST", "https://votacitizink.herokuapp.com").rstrip("/")
 
 # IMPORTANT: you should not change this setting once you've created
 # elections, as your elections' cast_url will then be incorrect.
