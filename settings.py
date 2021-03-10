@@ -165,7 +165,9 @@ INSTALLED_APPS = (
 ##
 ## HELIOS
 ##
-
+LOCALE_PATHS = (
+    os.path.join(PROJECT_PATH, 'server_ui/locale'),
+)
 
 MEDIA_ROOT = ROOT_PATH + "media/"
 
