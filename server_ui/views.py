@@ -5,6 +5,7 @@ server_ui specific views
 import copy
 
 from django.conf import settings
+from django.utils.translation import ugettext as _
 
 import helios_auth.views as auth_views
 from helios.models import Election
@@ -50,7 +51,8 @@ def home(request):
                                             'login_box' : login_box})
   
 def about(request):
-  return render_template(request, "about")
+  output = _('StatusMsg')
+  return render_template(output, "about")
 
 def docs(request):
   return render_template(request, "docs")

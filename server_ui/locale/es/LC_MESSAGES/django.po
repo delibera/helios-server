@@ -1,0 +1,7 @@
+# server_ui/locale/es/LC_MESSAGES/django.po
+
+...
+
+#: server_ui/templates/about.html:12
+msgid "AboutTitle"
+msgstr "Sobre Helios Voting"
