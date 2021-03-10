@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'static/(?P<path>.*)$', serve, {'document_root' : settings.ROOT_PATH + '/server_ui/media'}),
 
     url(r'^', include('server_ui.urls')),
+    url(r'^i18n/', include('django.conf.urls.i18n'))
+
 ]

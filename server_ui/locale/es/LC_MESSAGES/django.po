@@ -5,3 +5,9 @@
 #: server_ui/templates/about.html:12
 msgid "AboutTitle"
 msgstr "Sobre Helios Voting"
+
+#: server_ui/templates/about.html:15
+msgid "AboutHelios"
+msgstr "Helios es una organización imparcial liderada por"
+
+Helios is a non-partisan organization led by

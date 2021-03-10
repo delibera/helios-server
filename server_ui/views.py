@@ -51,7 +51,7 @@ def home(request):
                                             'login_box' : login_box})
   
 def about(request):
-  output = _('StatusMsg')
+  output = _('AboutTitle')
   return render_template(output, "about")
 
 def docs(request):
