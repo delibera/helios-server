@@ -2,7 +2,7 @@
 
 {% block title %}Voters &amp; Ballot Tracking Center for {{election.name}}{% endblock %}
 {% block content %}
-  <h3 class="title">{{election.name}} &mdash; Voters and Ballot Tracking Center <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">back to election</a>]</span></h3>
+  <h3 class="title">{{election.name}} &mdash; Centro de Rastreo de Papeletas y Votantes <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">volver a las elecciones</a>]</span></h3>
 
 <p>
 <b>¿Quién puede votar?</b>
@@ -15,7 +15,7 @@
 
 {% if admin_p and not election.frozen_at %}
 {% if election.private_p %}
-<em>Your election is marked private, which means you cannot open registration up more widely</em>.<br />
+<em>Tus elecciones están marcadas como privadas, lo cual significa que no puede abrir el registro más ampliamente</em>.<br />
 {% else %}
 Puedes cambiar esta configuración:
 <form method="post" action="{% url "election@voters@eligibility" election.uuid %}">
@@ -69,13 +69,13 @@ Prior Bulk Uploads:
 {% endif %}
  bytes, at {{vf.uploaded_at}}:
 {% if vf.processing_finished_at %}
-<em>done processing: {{vf.num_voters}} voters loaded</em>
+<em>procesado finalizado: {{vf.num_voters}} votantes cargados</em>
 {% else %}
 
 {% if vf.processing_started_at %}
-<em>currently processing</em>
+<em>actualmente procesando</em>
 {% else %}
-<em>not yet processed</em>
+<em>aún no procesado</em>
 {% endif %}
 
 {% endif %}
@@ -93,7 +93,7 @@ Prior Bulk Uploads:
 {% if election.num_cast_votes %}
 {{election.num_cast_votes}} cast vote{% ifequal election.num_cast_votes 1 %}{% else %}s{% endifequal %}
 {% else %}
-no votes yet
+sin votos aún
 {% endif %}
 </b>
 </p>
@@ -115,15 +115,15 @@ Voters {{voters_page.start_index}} - {{voters_page.end_index}} (of {{total_voter
 {% if admin_p %}
 <th style="width: 80px;">Actions</th>
 <th>Login</th>
-<th>Email Address</th>
+<th>Dirección Email</th>
 {% endif %}
-<th>Name</th>
+<th>Nombre</th>
 {% endif %}
 
 {% if election.use_voter_aliases %}
 <th>Alias</th>
 {% endif %}
-<th>Smart Ballot Tracker</th>
+<th>Rastreador de Papeleta Inteligente</th>
 </tr>
 {% for voter in voters %}
 <tr>

@@ -3,29 +3,29 @@
 {% block title %}Trustees for {{election.name}}{% endblock %}
 
 {% block content %}
-  <h3 class="title">{{election.name}} &mdash; Trustees <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">back to election</a>]</span></h3>
+  <h3 class="title">{{election.name}} &mdash; Fideicomisarios <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">volver a las elecciones</a>]</span></h3>
 
 <p>
-    Trustees are responsible for decrypting the election result.<br />
-    Each trustee generates a keypair and submits the public portion to Helios.<br />
-    When it's time to decrypt, each trustee needs to provide their secret key.
+    Los fideicomisarios son los responsables de desencriptar los resultados de las elecciones<br />
+    Cada fideicomisario genera un par de claves y envía la porción pública a Helios.<br />
+    Cuando llega la hora de desencriptar, cada fideicomisario necesita proveer su clave secreta.
 </p>
 
 {% if not election.frozen_at %}
 
 <p>
-  Helios is automatically your first trustee and will handle its keypair generation and decryption automatically.<br />
-  You may add additional trustees if you want, and you can even remove the Helios trustee.<br />
-  However, we recommend you do this only if you have a solid understanding of the trustee's role.
+  Helios es automáticamente tu primer fideicomisario y se encargará de su generación de par de claves y de la desencriptación automáticamente.<br />
+  Puedes añadir fideicomisarios extra si quieres, incluso puedes eliminar a Helios como fideicomisario.<br />
+  Sin embargo, Recomendamos que hagas esto solo si tienes un conocimiento sólido sobre el rol del fideicomisario.
 </p>
 
 {% if admin_p %}
 <p>
-    [ <a onclick="return(confirm('Adding your own trustee requires a good bit more work to tally the election.\nYou will need to have trustees generate keypairs and safeguard their secret key.\n\nIf you are not sure what that means, we strongly recommend\nclicking Cancel and letting Helios tally the election for you.'));" href="{% url "election@trustees@new" election.uuid %}">add a trustee</a> ]
+    [ <a onclick="return(confirm('Añadir tu propio fideicomisario requiere bastante más trabajo para el recuento de las elecciones.\nNecesitarás que los fideicomisarios generen pares de claves y custodiar sus claves secretas.\n\nSi no estás seguro de lo que eso significa, Te recomendamos\nhacer click en Cancelar y dejar que Helios recuente las elecciones por tí.'));" href="{% url "election@trustees@new" election.uuid %}">añadir un fideicomisario</a> ]
 </p>
 {% if not election.has_helios_trustee %}
 <p>
-    <a href="{% url "election@trustees@add-helios" election.uuid %}">add Helios as a trustee</a>
+    <a href="{% url "election@trustees@add-helios" election.uuid %}">añadir a Helios como fideicomisario</a>
 </p>
 {% endif %}
 {% endif %}
@@ -36,13 +36,13 @@
 
 {% else %}
 {% for t in trustees %}
-<h5> Trustee #{{forloop.counter}}: {{t.name}} 
+<h5> Fideicomisario #{{forloop.counter}}: {{t.name}} 
 {% if admin_p %}
 {% if t.secret_key %}
-{% if not election.frozen_at %}[<a onclick="return confirm('Are you sure you want to remove Helios as a trustee?');" href="{% url "election@trustees@delete" election.uuid %}?uuid={{t.uuid}}">x</a>]{% endif %}
+{% if not election.frozen_at %}[<a onclick="return confirm('¿Estás seguro de que quieres eliminar a Helios como fideicomisario?');" href="{% url "election@trustees@delete" election.uuid %}?uuid={{t.uuid}}">x</a>]{% endif %}
 {% else %}
 ({{t.email}})
-{% if not election.frozen_at %}[<a onclick="return confirm('Are you sure you want to remove this Trustee?');" href="{% url "election@trustees@delete" election.uuid %}?uuid={{t.uuid}}">x</a>]{% endif %}
+{% if not election.frozen_at %}[<a onclick="return confirm('¿Estás seguro de que quieres eliminar a este fideicomisario?');" href="{% url "election@trustees@delete" election.uuid %}?uuid={{t.uuid}}">x</a>]{% endif %}
 [<a onclick="return confirm('Are you sure you want to send this trustee his/her admin URL?');" href="{% url "election@trustee@send-url" election.uuid t.uuid %}">send login</a>]
 {% endif %}
 {% endif %}
@@ -50,17 +50,17 @@
 
 <p>
 {% if t.public_key_hash %}
-  Public Key Fingerprint: <tt style="font-size:1.5em;">{{t.public_key_hash}}</tt>
+  Huella digital de clave pública: <tt style="font-size:1.5em;">{{t.public_key_hash}}</tt>
 {% else %}
-No public key uploaded yet.
+No hay una clave pública subida aún.
 {% endif %}
 </p>
 
 {% if election.encrypted_tally %}
 {% if t.decryption_factors %}
-<b>tally recorded for this trustee.</b>
+<b>recuento registrado para este fideicomisario.</b>
 {% else %}
-<em>waiting for this trustee's tally</em>
+<em>esperando el recuento de este fideicomisario</em>
 {% endif %}
 {% endif %}
 </li>
