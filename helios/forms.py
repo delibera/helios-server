@@ -11,7 +11,7 @@ from .widgets import SplitSelectDateTimeWidget
 
 
 class ElectionForm(forms.Form):
-  short_name = forms.SlugField(max_length=40, label="Nombre Corto" help_text='sin espacios, formará parte de la URL para tus elecciones, ej. my-club-2010')
+  short_name = forms.SlugField(max_length=40, label="Nombre Corto", help_text='sin espacios, formará parte de la URL para tus elecciones, ej. my-club-2010')
   name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'size':60}), help_text='el nombre para tus elecciones, ej. Elecciones Mi Club 2010')
   description = forms.CharField(max_length=4000, widget=forms.Textarea(attrs={'cols': 70, 'wrap': 'soft'}), required=False)
   election_type = forms.ChoiceField(label="tipo", choices = Election.ELECTION_TYPES)
