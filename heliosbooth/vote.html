@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8" />
-  <title>Helios Voting Booth</title>
+  <title>Cabina de Votación Helios</title>
   <link rel="stylesheet" type="text/css" href="css/booth.css" />
   <link rel="stylesheet" type="text/css" href="css/forms.css" />
 
@@ -28,8 +28,8 @@
 </head>
 <body>
 <div id="wrapper">
-<span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.exit();">exit</a>]</span>
-<div id="banner">Helios Voting Booth</div>
+<span style="float:right; padding: 7px 15px 5px 10px;">[<a href="javascript:BOOTH.exit();">salir</a>]</span>
+<div id="banner">Cabina de Votación Helios</div>
 <div id="content">
 
 <div id="header">
@@ -76,7 +76,7 @@ window.onbeforeunload = function(evt) {
 };
 
 BOOTH.exit = function() {
-    if (confirm("Are you sure you want to exit the booth and lose all information about your current ballot?")) {
+    if (confirm("¿Estás seguro de que quieres salir de la cabina y perder toda la información de tu papeleta actual?")) {
         BOOTH.started_p = false;
         window.location = BOOTH.election.cast_url;
     }
@@ -594,21 +594,21 @@ BOOTH.do_done = function() {
 <div id="page">
   <div id="progress_div" style="display:none; width: 500px; margin:auto;">
       <table width="100%">
-          <tr><td id="progress_1">(1) Select</td><td id="progress_2">(2) Review</td><td id="progress_3">(3) Submit</td></tr>
+          <tr><td id="progress_1">(1) Selecciona</td><td id="progress_2">(2) Revisa</td><td id="progress_3">(3) Envía</td></tr>
       </table>
   </div>
   <div id="election_div" class="panel">
-    <h3>Checking capabilities and loading election booth...</h3>
-    <div align="center"><img src="loading.gif" /><br />This may take up to 10 seconds</div>
+    <h3>Comprobando capacidades y cargando la cabina de las elecciones...</h3>
+    <div align="center"><img src="loading.gif" /><br />Esto puede llevar hasta 10 segundos</div>
   </div>
 
   <div id="error_div" class="panel" style="display: none;">
-    <h3>There's a problem</h3>
+    <h3>Hay un problema</h3>
     <p>
-      It appears that your browser does not have Java enabled. Helios needs Java to perform encryption within the browser.
+      Parece ser que tu navegador no tiene Java activado. Helios necesita Java para realizar la encriptación en el navegador.
     </p>
     <p>
-      You may be able to install Java by visiting <a target="_new" href="http://java.com">java.com</a>.
+      Puedes instalar Java visitando <a target="_new" href="http://java.com">java.com</a>.
     </p>
   </div>
 
@@ -616,14 +616,14 @@ BOOTH.do_done = function() {
   </div>
 
   <div id="processing_div" class="panel" style="display:none;">
-      <h3 align="center">Processing....</h3>
+      <h3 align="center">Procesando....</h3>
   </div>
 
   <div id="encrypting_div" class="panel" style="display:none;">
-      <h3 align="center">Helios is now encrypting your ballot<br />
+      <h3 align="center">Helios está ahora encriptando tu papeleta<br />
           <img src="encrypting.gif" /> <span style="font-size:0.7em; display:none;" id="percent_done_container">(<span id="percent_done">0</span>%)</span></h3>
 
-      <p align="center"><b>This may take up to two minutes.</b>
+      <p align="center"><b>Esto puede tomar hasta 2 minutos.</b>
   </div>
 
   <div id="seal_div" class="panel">
