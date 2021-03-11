@@ -35,14 +35,14 @@ class ElectionTimeExtensionForm(forms.Form):
                                    widget=SplitSelectDateTimeWidget, required=False)
   
 class EmailVotersForm(forms.Form):
-  subject = forms.CharField(max_length=80)
-  body = forms.CharField(max_length=4000, widget=forms.Textarea)
-  send_to = forms.ChoiceField(label="Send To", initial="all", choices= [('all', 'all voters'), ('voted', 'voters who have cast a ballot'), ('not-voted', 'voters who have not yet cast a ballot')])
+  subject = forms.CharField(max_length=80, label="Asunto")
+  body = forms.CharField(max_length=4000, label="Cuerpo", widget=forms.Textarea)
+  send_to = forms.ChoiceField(label="Enviar a", initial="all", choices= [('all', 'all voters'), ('voted', 'voters who have cast a ballot'), ('not-voted', 'voters who have not yet cast a ballot')])
 
 class TallyNotificationEmailForm(forms.Form):
   subject = forms.CharField(max_length=80)
   body = forms.CharField(max_length=2000, widget=forms.Textarea, required=False)
-  send_to = forms.ChoiceField(label="Send To", choices= [('all', 'all voters'), ('voted', 'only voters who cast a ballot'), ('none', 'no one -- are you sure about this?')])
+  send_to = forms.ChoiceField(label="Enviar a", choices= [('all', 'all voters'), ('voted', 'only voters who cast a ballot'), ('none', 'no one -- are you sure about this?')])
 
 class VoterPasswordForm(forms.Form):
   voter_id = forms.CharField(max_length=50, label="Voter ID")

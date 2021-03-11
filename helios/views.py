@@ -1331,10 +1331,10 @@ def voters_email(request, election):
   if not VOTERS_EMAIL:
     return HttpResponseRedirect(settings.SECURE_URL_HOST + reverse(url_names.election.ELECTION_VIEW, args=[election.uuid]))
   TEMPLATES = [
-    ('vote', 'Time to Vote'),
+    ('vote', 'Hora de Votar'),
     ('simple', 'Simple'),
-    ('info', 'Additional Info'),
-    ('result', 'Election Result')
+    ('info', 'Información Adicional'),
+    ('result', 'Resultado de la Votación')
     ]
 
   template = request.GET.get('template', 'vote')

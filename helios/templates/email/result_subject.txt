@@ -1,1 +1,1 @@
-Tally Released - {{custom_subject|safe}}
+Recuento Publicado - {{custom_subject|safe}}

@@ -553,7 +553,7 @@ BOOTH.audit_ballot = function() {
 
 BOOTH.post_audited_ballot = function() {
   $.post(BOOTH.election_url + "/post-audited-ballot", {'audited_ballot': BOOTH.audit_trail}, function(result) {
-    alert('This audited ballot has been posted.\nRemember, this vote will only be used for auditing and will not be tallied.\nClick "back to voting" and cast a new ballot to make sure your vote counts.');
+    alert('Esta papeleta auditada ha sido publicada.\nRecuerda, este voto solo será usado para auditoría y no será escrutado.\nHaz click en "volver a la votación" y emite una nueva papeleta para asegurarte de que tu voto cuenta.');
   });
 };
 
