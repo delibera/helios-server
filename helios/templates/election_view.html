@@ -108,13 +108,13 @@
 {{issue.action}}{% if forloop.last %}{% else %}, y{% endif %}<br />
 {% endfor %}
 {% else %}
-<a href="{% url "election@freeze" election.uuid %}">freeze ballot and open election.</a>
+<a href="{% url "election@freeze" election.uuid %}">congelar papeleta y abrir votación</a>
 <br />
 {% if election.voting_starts_at %}
-once you do this, the election will be ready for voting and will open automatically<br />
-at {{election.voting_starts_at}}, as per your settings.
+una vez hagas esto, la votación estará lista para votar y se abrirá automáticamente<br />
+el {{election.voting_starts_at}}, según tu configuración.
 {% else %}
-once you do this, the election will be immediately open for voting.
+una vez hagas esto, la votación se abrirá inmediatamente para votar.
 {% endif %}
 {% endif %}
 
@@ -125,9 +125,9 @@ once you do this, the election will be immediately open for voting.
 La computación del recuento está en marcha.<br />
 Recarga esta página en un par de minutos.
 {% else %}
-<a href="{% url "election@compute-tally" election.uuid %}">compute encrypted tally</a><br />
-The encrypted votes will be combined into an encrypted tally. Once this is done,<br />
-trustees will be asked to provide their share of the decryption.
+<a href="{% url "election@compute-tally" election.uuid %}">computar recuento encriptado</a><br />
+Los votos encriptados serán combinados en un recuento encriptado. Una vez esté hecho,<br />
+los fideicomisarios serán preguntados para proveer y compartir su desencriptación.
 {% endif %}
 {% else %}
 
@@ -146,10 +146,10 @@ combinar las desencriptaciones de los fideicomisarios y computar resultados
 {% endif %}
 </a><br />
 {% if election.num_trustees == 1 %}
-The result will be computed and shown to you, the administrator, only.
+El resultado será computado y mostrado a tí, el administrador, únicamente.
 {% else %}
-The decryption shares from the trustees will be combined and the tally computed.<br />
-Once you do this, the tally will visible to you, the administrator, only.
+Las acciones de desencriptado de los fideicomisarios serán combianadas y el recuento computado.<br />
+Una vez hagas esto, el recuento será visible para tí, el administrador, únicamente.
 {% endif %}
 {% else %}
 <a href="{% url "election@trustees@view" election.uuid %}">fideicomisarios (para desencriptar)</a>
@@ -173,7 +173,7 @@ Once you do this, the tally will visible to you, the administrator, only.
 {% if show_result %}
 {% if election.result_released_at %}
 <span class="highlight-box round">
-    This election is complete.
+    Está elección está completa.
 </span><br /><br /><br />
 {% endif %}
 
@@ -196,18 +196,39 @@ Once you do this, the tally will visible to you, the administrator, only.
 {% else %}
 
 {% if election.voting_has_started %}
-<a class="button" href="{{test_cookie_url}}">Vote in this {{election.election_type}} </a>
+{% if election.election_type == "referendum" %}
+  <a class="button" href="{{test_cookie_url}}">Vota en este {{election.election_type}} </a>
+{% endif %}
+{% if election.election_type == "elecciones" %}
+  <a class="button" href="{{test_cookie_url}}">Vota en estas {{election.election_type}} </a>
+{% endif %}
 <br />
 <br />
 {% if election.voting_extended_until %}
-This {{election.election_type}} was initially scheduled to end at {{election.voting_ends_at}} (UTC),<br />
-but has been extended until {{ election.voting_extended_until }} (UTC).
+{% if election.election_type == "referendum" %}
+Este {{election.election_type}} estaba inicialmente previsto para acabar el {{election.voting_ends_at}} (UTC),<br />
+pero ha sido extendido hasta el {{ election.voting_extended_until }} (UTC).
+{% endif %}
+{% if election.election_type == "elecciones" %}
+Estas {{election.election_type}} estaban inicialmente previstas para acabar el {{election.voting_ends_at}} (UTC),<br />
+pero han sido extendidas hasta el {{ election.voting_extended_until }} (UTC).
+{% endif %}
 {% else %}
 {% if election.voting_ends_at %}
 <br />
-This {{election.election_type}} is scheduled to end at {{election.voting_ends_at}} (UTC).
+{% if election.election_type == "referendum" %}
+Este {{election.election_type}} está programado para acabar el {{election.voting_ends_at}} (UTC).
+{% endif %}
+{% if election.election_type == "elecciones" %}
+Estas {{election.election_type}} están programadas para acabar el {{election.voting_ends_at}} (UTC).
+{% endif %}
 {% else %}
-This {{election.election_type}} ends at the administrator's discretion.
+{% if election.election_type == "referendum" %}
+Este {{election.election_type}} acaba a discreción del administrador.
+{% endif %}
+{% if election.election_type == "elecciones" %}
+Estas {{election.election_type}} acaban a discreción del administrador.
+{% endif %}
 {% endif %}
 <br />
 {% endif %}
@@ -218,8 +239,8 @@ Esta votación es <em>privada</em>. Estás registrado como votante elegible <em>
 {% endif %}
 
 <div class="highlight-box round" style="font-size: 1.2em; margin-right: 400px; display:none;" id="nojava_message">
-  You do not have Java installed in your browser.<br />At this time, Helios requires Java.<br />
-  Visit <a target="_new" href="http://java.sun.com">java.sun.com</a> to install it.
+  No tienes Java instalado en tu navegador.<br />En este momento, Helios necesita Java.<br />
+  Visita <a target="_new" href="http://java.sun.com">java.sun.com</a> para instalarlo.
 </div>
 <br />
 {% else %}
@@ -231,7 +252,12 @@ Esta votación es <em>privada</em>. Estás registrado como votante elegible <em>
 {% if user %}
 {% if voter %}
 <p style="padding-top:1px;">
-  You are registered to vote in this {{election.election_type}}.
+  {% if election.election_type == "referendum" %}
+  Estás registrado para votar en este {{election.election_type}}.
+  {% endif %}
+  {% if election.election_type == "elecciones" %}
+  Estás registrado para votar en estas {{election.election_type}}.
+  {% endif %}
 {% if election.use_voter_aliases %}
 Tu alias de votante es {{voter.alias}}.
 {% endif %}
