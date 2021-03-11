@@ -35,7 +35,7 @@ Debes congelar la papeleta antes de que puedas contactar a votantes.
 <form method="post" action="">
 <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
     
-<input class="button" type="submit" value="Freeze the ballot" />
+<input class="button" type="submit" value="Congelar la papeleta" />
 <button onclick="document.location='{% url "election@view" election.uuid %}'; return false;">no importa</button>
 </form>
 {% endif %}
