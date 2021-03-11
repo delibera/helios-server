@@ -3,43 +3,43 @@
 {% block title %}Audited Ballots for {{election.name}}{% endblock %}
 
 {% block content %}
-  <h2 class="title">{{election.name}} &mdash; Audited Ballots <span style="font-size:0.7em;">[<a href="{% url "election@view" election_uuid=election.uuid %}">back to election</a>]</span></h2>
+  <h2 class="title">{{election.name}} &mdash; Papeletas Auditadas <span style="font-size:0.7em;">[<a href="{% url "election@view" election_uuid=election.uuid %}">volver a las elecciones</a>]</span></h2>
 
 <p>
-When you prepare a ballot with Helios, you immediately receive a smart ballot tracker. Before you choose to cast that ballot, you have the option to ask Helios to "break open" that encrypted ballot and verify that Helios encrypted your ballot correctly. Once that's done, you can post that opened ballot here, on the audited ballots' list, for everyone to verify (your identity is not included). Once you've done this, you have to re-encrypt your choices and obtain a different smart ballot tracker. This helps reduce the chance that someone might coerce you to vote differently from your true choice.
+Cuando preparas una papeleta con Helios, inmediatamente recibes un rastreador de papeleta inteligente. Antes de que elijas emitir esa papeleta, tienes la opción de pedir a Helios "forzar" esa papeleta encriptada y verificar que Helios ha encriptado tu papeleta correctamente. Una vez hecho, puedes publicar esa papeleta abierta aquí, en la lista de papeletas auditadas, para que todos puedan verificarlo (tu identidad no se incluye). Una vez hayas hecho esto, tienes que re-encriptar tus decisiones y obtener un rastreador de papeleta inteligente diferente. Esto ayuda a reducir la posibilidad de que alguien pueda obligarte a votar algo distinto a tu elección verdadera.
 </p>
 
 <p>
-These ballots are <em>not cast</em>, and they will not be counted. They are just here for auditing purposes, to spot-check that Helios is properly encrypting voter's choices.
+Estas papeletas <em>no están emitidas</em>, y no se contarán. Solo están aquí por propósitos de auditoría, para revisar que Helios está encriptando debidamente las elecciones de los votantes.
 </p>
 
 <p>
-  To verify an audited ballot, copy its entire content and paste it in the <a target="_new" href="/booth/single-ballot-verify.html?election_url={% url "election@home" election.uuid %}">single ballot verifier</a>.
+  Para verificar una papeleta auditada, copia todo su contenido y pégalo en el <a target="_new" href="/booth/single-ballot-verify.html?election_url={% url "election@home" election.uuid %}">verificador de papeleta única</a>.
 </p>
 
 {% if audited_ballots %}
 <p>
-Audited Ballots {{offset_plus_one}} - {{offset_plus_limit}} &nbsp;&nbsp;
+Papeletas Auditadas {{offset_plus_one}} - {{offset_plus_limit}} &nbsp;&nbsp;
 </p>
 
 {% if next_after %}
-<a href="?after={{next_after}}&offset={{offset_plus_limit}}">next {{limit}}</a> &nbsp;&nbsp;
+<a href="?after={{next_after}}&offset={{offset_plus_limit}}">siguiente {{limit}}</a> &nbsp;&nbsp;
 {% endif %}
 
 {% ifequal offset 0 %}
 {% else %}
-<a href="?">back to start</a> &nbsp;&nbsp;
+<a href="?">volver al principio</a> &nbsp;&nbsp;
 {% endifequal %}
 {% if more_p %}
-<a href="?after={{next_after}}&offset={{next_offset}}">next {{limit}}</a>
+<a href="?after={{next_after}}&offset={{next_offset}}">siguiente {{limit}}</a>
 {% endif %}
 <table class="pretty">
 {% for b in audited_ballots %}
-<tr><td><tt style="font-size: 1.4em;">{{b.vote_hash}}</tt> [<a target="_blank" href="?vote_hash={{b.vote_hash|urlencode}}">view</a>]</td></tr>
+<tr><td><tt style="font-size: 1.4em;">{{b.vote_hash}}</tt> [<a target="_blank" href="?vote_hash={{b.vote_hash|urlencode}}">ver</a>]</td></tr>
 {% endfor %}
 </table>
 {% else %}
-<em>no audited ballots yet</em>
+<em>no hay papeletas auditadas aún</em>
 {% endif %}
 
 {% endblock %}

@@ -43,19 +43,19 @@ function check_sk(sk_value) {
     }
 }
 </script>
-  <h2 class="title">{{election.name}} &mdash; Trustee {{trustee.name}} &mdash; Check Secret Key <span style="font-size:0.7em;">[<a href="{% url "election@trustee" election_uuid=election.uuid trustee_uuid=trustee.uuid %}">back to trustee home</a>]</span></h2>
+  <h2 class="title">{{election.name}} &mdash; Fideicomisario {{trustee.name}} &mdash; Comprobar Clave Secreta <span style="font-size:0.7em;">[<a href="{% url "election@trustee" election_uuid=election.uuid trustee_uuid=trustee.uuid %}">volver al inicio de fideicomisarios</a>]</span></h2>
 
 <p>
-Your public key fingerprint is: <b>{{trustee.public_key_hash}}</b>
+Tu huella digital pública es: <b>{{trustee.public_key_hash}}</b>
 </p>
 
 <div id="loading">
-loading crypto functions...
+cargando funciones criptográficas...
 </div>
 
 <div id="input" style="display:none;">
 <p>
-To verify that you have the right secret key, paste it here:
+Para verificar que tienes la clave secreta correcta, pégala aquí:
 <p>
 
 <form onsubmit="check_sk(this.secret_key.value); this.secret_key.value=''; return false;">
@@ -67,7 +67,7 @@ To verify that you have the right secret key, paste it here:
 </div>
 
 <div id="processing" style="display:none;">
-checking your secret key...
+comprobando tu clave secreta...
 </div>
 
 <div id="result">

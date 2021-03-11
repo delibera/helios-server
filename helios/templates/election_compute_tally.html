@@ -3,28 +3,28 @@
 {% block title %}Compute Encryted Tally for {{election.name}}{% endblock %}
 
 {% block content %}
-  <h2 class="title">Compute Tally for Election: {{election.name}}</h2>
+  <h2 class="title">Compoutar el Recuento para la Votación: {{election.name}}</h2>
 
 <div id="instructions">
 {% if election.num_cast_votes %}
 <p>
-    You are about to compute the encrypted tally for election <b>{{election.name}}</b>.
+    Estás a punto de computar el recuento encriptado para la votación <b>{{election.name}}</b>.
 </p>
 
 <p>
-    Once you do this, voters will no longer be able to cast a ballot.
+    Una vez hagas esto, los votantes ya no podrán emitir una papeleta.
 </p>
 
 <form method="post" action="" onsubmit="alert('ok, tally has begun')" class="pretty">
 <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
     
 <input class="button" type="submit" value="compute encrypted tally!" />
-<button onclick="document.location='{% url "election@view" election.uuid %}'; return false;">never mind</button>
+<button onclick="document.location='{% url "election@view" election.uuid %}'; return false;">no importa</button>
 </form>
 {% else %}
 <p>
-No votes have been cast in this election. At least one vote must be cast before you compute the tally.<br /><br />
-<a href="{% url "election@view" election.uuid %}">back to election</a>
+Ningún voto ha sido emitido para esta votación. Al menos un voto debe ser emitido antes antes de que computes el recuento.<br /><br />
+<a href="{% url "election@view" election.uuid %}">volver a la votación</a>
 </p>
 {% endif %}
 </div>

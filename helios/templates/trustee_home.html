@@ -1,29 +1,29 @@
 {% extends "helios/templates/cryptobase.html" %}
 
 {% block content %}
-  <h2 class="title">{{election.name}} &mdash; Trustee {{trustee.name}} Home</span></h2>
+  <h2 class="title">{{election.name}} &mdash; Fideicomisario {{trustee.name}} Página principal</span></h2>
 
 <p>
 {% if trustee.public_key_hash %}
-You have successfully uploaded your public key.<br />
-Your public key fingerprint is: <b>{{trustee.public_key_hash}}</b>.<br />
-You can <a href="{% url "election@trustee@check-sk" election.uuid trustee.uuid %}">verify that you have the right secret key</a>.
+Has subido tu clave pública exitosamente.<br />
+Tu huella digital de clave pública es: <b>{{trustee.public_key_hash}}</b>.<br />
+Puedes <a href="{% url "election@trustee@check-sk" election.uuid trustee.uuid %}">verificar que tienes la clave secreta correcta</a>.
 {% else %}
-<a href="{% url "election@trustee@key-generator" election.uuid trustee.uuid %}">setup your key</a>
+<a href="{% url "election@trustee@key-generator" election.uuid trustee.uuid %}">configurar tu clave</a>
 {% endif %}
 </p>
 
 <p>
 {% if election.encrypted_tally %}
 {% if trustee.decryption_factors %}
-You have successfully uploaded your decryption.
+Has subido correctamente tu desencriptación
 {% else %}
-    The encrypted tally for this election is ready.<br />
-    <a href="{% url "election@trustee@decrypt-and-prove" election.uuid trustee.uuid %}">decrypt with your key</a>
+    El recuento encriptado de esta votación está listo<br />
+    <a href="{% url "election@trustee@decrypt-and-prove" election.uuid trustee.uuid %}">desencriptar con tu clave</a>
 {% endif %}
 {% else %}
-Once the tally is computed, come back here to provide your secret key for decryption purposes.<br />
-You should keep the email with your trustee homepage link, which contains the credentials needed to get back here.
+Una vez el recuento esté computado, Vuelve aquí para proveer tu clave privada para propósitos de desencriptación.<br />
+Deberías guardar el email con el enlace a tu página principal de fideicomisario, el cual contiene las credenciales que necesitas para volver aquí.
 {% endif %}
 </p>
 

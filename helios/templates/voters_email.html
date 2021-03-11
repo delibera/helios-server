@@ -9,16 +9,16 @@ voter_id = '{{voter.voter_id}}';
 {% endif %}
 </script>
 
-  <h2 class="title">{{election.name}} &mdash; Contact Voters <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">back to election</a>]</span></h2>
+  <h2 class="title">{{election.name}} &mdash; Contactar Votantes <span style="font-size:0.7em;">[<a href="{% url "election@view" election.uuid %}">volver a la votación</a>]</span></h2>
 
 {% if voter %}  
   <p>
-    You are sending this email to a specific user: <b>{{voter.name}} ({{voter.voter_id}})</b>
+    Estás enviando este email a un usuario específico: <b>{{voter.name}} ({{voter.voter_id}})</b>
   </p>
 {% endif %}
 
 <p>
-<b>Templates</b>:
+<b>Plantillas</b>:
 
 {% for template_option in templates %}
 {% if template_option.0 == template %}
@@ -30,13 +30,13 @@ voter_id = '{{voter.voter_id}}';
 {% endfor %}
 
 <pre style="margin:10px; border: 1px solid #888; padding:20px">
-Subject: {{default_subject}}
+Asunto: {{default_subject}}
 
 {{default_body|safe}}
 </pre>
 
 <p>
-You may tweak the subject and add a custom message using the form below.
+Puedes cambiar el asunto y añadir un mensaje personalizado usando el formulario de debajo.
 </p>
 
   <form class="prettyform" action="" method="POST" id="email_form">
@@ -55,11 +55,11 @@ You may tweak the subject and add a custom message using the form below.
   </div>
   
   <div id="done" style="display:none;">
-    Done, go <a href="{% url "election@view" election.uuid %}">back to election</a>.
+    Terminado, <a href="{% url "election@view" election.uuid %}">volver a la votación</a>.
   </div>
 
   <div id="error" style="display:none;">
-    Error emailing participants. Check server settings, make sure there's an SMTP server.
+    Error mandando email a los participantes. Comprueba la configuración del servidor, asegúrate de que hay un servidor SMTP.
   </div>
 
 {% endblock %}

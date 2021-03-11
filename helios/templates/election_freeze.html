@@ -1,42 +1,42 @@
 {% extends TEMPLATE_BASE %}
 
 {% block content %}
-  <h2 class="title">{{election.name}} &mdash; Freeze Ballot</h2>
+  <h2 class="title">{{election.name}} &mdash; Congelar Papeleta</h2>
 <p>
-Once the ballot is frozen, the questions and options can no longer be modified.<br />
-The list of trustees and their public keys will also be frozen.
+Una vez que la papeleta está congelada, las preguntas y opciones ya no pueden ser modificadas.<br />
+La lista de fideicomisarios y sus claves públicas también serán congeladas.
 </p>
 
 <p>
 {% if election.openreg %}
-Registration for your election is currently <b>open</b>, which means anyone can vote, even after you freeze the ballot.
+El registro para tus elecciones está actualmente <b>abierto</b>, lo que significa que cualquiera puede votar, incluso después de que congeles la papeleta.
 {% else %}
-Registration for your election is currently <b>closed</b>, which means only the voters you designate will be able to cast a ballot. As the administrator, you will still be able to modify that voter list as the election progresses.
+El registro para tus elecciones está actualmente <b>cerrado</b>, lo que significa que solo los votantes que designes podrán emitir una papeleta. Como administrador, todavía podrás modificar esa lista de votantes mientras las elecciones avanzan.
 {% endif %}
 </p>    
 
 {% if helios.VOTERS_EMAIL %}
 <p>
-You must freeze the ballot before you can contact voters.
+Debes congelar la papeleta antes de que puedas contactar a votantes.
 </p>
 {% endif %}
 
 {% if issues_p %}
 <p>
-    Before you can freeze the election, you will need to:
+    Antes de que puedas congelar las elecciones, necesitarás:
     <ul>
         {% for issue in issues %}
         <li>{{issue.action}}</li>
         {% endfor %}
     </ul>
-    <a href="{% url "election@view" election.uuid %}">go back to the election</a>
+    <a href="{% url "election@view" election.uuid %}">volver a las elecciones</a>
 </p>
 {% else %}
 <form method="post" action="">
 <input type="hidden" name="csrf_token" value="{{csrf_token}}" />
     
 <input class="button" type="submit" value="Freeze the ballot" />
-<button onclick="document.location='{% url "election@view" election.uuid %}'; return false;">never mind</button>
+<button onclick="document.location='{% url "election@view" election.uuid %}'; return false;">no importa</button>
 </form>
 {% endif %}
 
