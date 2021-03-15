@@ -5,7 +5,7 @@
 
 {% if user %}
 <p style="font-size: 1.4em;">
-    You are currently logged in as<br /><b>{{user.user_id}}</b> via <b>{{user.user_type}}</b>.
+    Actualmente has iniciado sesión como<br /><b>{{user.user_id}}</b> via <b>{{user.user_type}}</b>.
 </p>
 <p>
     <a href="{% url "auth@logout" %}">cerrar sesión</a>
