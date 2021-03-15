@@ -103,7 +103,7 @@ sin votos aún
 {% endif %}
 
 
-Voters {{voters_page.start_index}} - {{voters_page.end_index}} (of {{total_voters}})&nbsp;&nbsp;
+Votantes {{voters_page.start_index}} - {{voters_page.end_index}} (de {{total_voters}})&nbsp;&nbsp;
 
 {% if voters_page.has_next %}
 <a href="{% url "election@voters@list-pretty" election.uuid %}?page={{voters_page.next_page_number}}&limit={{limit}}&q={{q|urlencode}}">next {{limit}}</a> &nbsp;&nbsp;
