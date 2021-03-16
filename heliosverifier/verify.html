@@ -142,7 +142,7 @@ function load_election_and_ballots(election_url) {
                                 // keep track of tally
                                 tally[answer_num][choice_num] = choice.multiply(tally[answer_num][choice_num]);
 
-                                result_append("Pregunta #" + (answer_num+1) + ", Option #" + (choice_num+1) + " -- " + pretty_result(result));
+                                result_append("Pregunta #" + (answer_num+1) + ", Opción #" + (choice_num+1) + " -- " + pretty_result(result));
                             } else {
                                 result_append("Pregunta #" + (answer_num+1) + " OVERALL -- " + pretty_result(result));
                             }
@@ -209,7 +209,7 @@ function load_election_and_ballots(election_url) {
                                                        trustee.decryption_proofs[q_num][a_num], ElGamal.fiatshamir_challenge_generator)) {
                                            result_append("-- Fideicomisario " + trustee.email + ": factores de desencriptado verifican");
                                        } else {
-                                           result_append("==== ERROR con el fideicomisario " + trustee.email + ": decryption factor does not verify");
+                                           result_append("==== ERROR con el fideicomisario " + trustee.email + ": factor de desencriptado no se verifica");
                                            check= false;
                                            overall_result = false;
                                        }

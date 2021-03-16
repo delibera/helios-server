@@ -23,7 +23,7 @@ Puedes cambiar esta configuración:
 <input type="radio" name="eligibility" value="openreg" {% if election.openreg and not election.eligibility %}CHECKED{% endif %} /> cualquiera puede votar<br />
 <input type="radio" name="eligibility" value="closedreg" {% if not election.openreg %}CHECKED{% endif %} /> solo los votantes listados explícitamente abajo pueden votar<br />
 {% if categories %}
-<input type="radio" name="eligibility" value="limitedreg" {% if election.eligibility %}CHECKED{% endif %} /> only voters who are members of 
+<input type="radio" name="eligibility" value="limitedreg" {% if election.eligibility %}CHECKED{% endif %} /> solo votantes que son miembros de 
 <select name="category_id">
 {% for category in categories %}
 <option value="{{category.id}}" {% if eligibility_category_id == category.id %}SELECTED{% endif %}> {{category.name}}</option>
@@ -43,7 +43,7 @@ Puedes cambiar esta configuración:
 {% if election.num_voters > 20 %}
 <p>
 {% if q %}
-<p><em>searching for <u>{{q}}</u>.</em> [<a href="?">clear search</a>]</p>
+<p><em>buscando <u>{{q}}</u>.</em> [<a href="?">borrar búsqueda</a>]</p>
 {% else %}
 <form method="get" action="{% url "election@voters@list-pretty" election.uuid %}"><b>buscar</b>: <input type="text" name="q" /> <input type="submit" value="search" /></form>
 {% endif %}
@@ -99,14 +99,14 @@ sin votos aún
 </p>
 
 {% if voters_page.has_previous %}
-<a href="{% url "election@voters@list-pretty" election.uuid %}?page={{voters_page.previous_page_number}}&limit={{limit}}&q={{q|urlencode}}">previous {{limit}}</a> &nbsp;&nbsp;
+<a href="{% url "election@voters@list-pretty" election.uuid %}?page={{voters_page.previous_page_number}}&limit={{limit}}&q={{q|urlencode}}">anterior {{limit}}</a> &nbsp;&nbsp;
 {% endif %}
 
 
 Votantes {{voters_page.start_index}} - {{voters_page.end_index}} (de {{total_voters}})&nbsp;&nbsp;
 
 {% if voters_page.has_next %}
-<a href="{% url "election@voters@list-pretty" election.uuid %}?page={{voters_page.next_page_number}}&limit={{limit}}&q={{q|urlencode}}">next {{limit}}</a> &nbsp;&nbsp;
+<a href="{% url "election@voters@list-pretty" election.uuid %}?page={{voters_page.next_page_number}}&limit={{limit}}&q={{q|urlencode}}">siguiente {{limit}}</a> &nbsp;&nbsp;
 {% endif %}
 
 <table class="pretty">
@@ -133,7 +133,7 @@ Votantes {{voters_page.start_index}} - {{voters_page.end_index}} (de {{total_vot
 {% if election.frozen_at %}
 [<a href="{% url "election@voters@email" election.uuid %}?voter_id={{voter.voter_login_id}}">email</a>]
 {% endif %}
-[<a onclick="return confirm('are you sure you want to remove {{voter.name}} ?');" href="{% url "election@voter@delete" election.uuid voter.uuid %}">x</a>]
+[<a onclick="return confirm('¿estás seguro de que quieres eliminar a {{voter.name}} ?');" href="{% url "election@voter@delete" election.uuid voter.uuid %}">x</a>]
 </td>
 <td>{{voter.voter_login_id}}</td>
 <td>{{voter.voter_email}}</td>
@@ -143,7 +143,7 @@ Votantes {{voters_page.start_index}} - {{voters_page.end_index}} (de {{total_vot
 {% if election.use_voter_aliases %}
 <td>{{voter.alias}}</td>
 {% endif %}
-<td><tt style="font-size: 1.4em;">{% if voter.vote_hash %}{{voter.vote_hash}} <span style="font-size:0.8em;">[<a href="{% url "shortcut@vote" vote_tinyhash=voter.vote_tinyhash %}">view</a>]</span>{% else %}&mdash;{% endif %}</tt></td>
+<td><tt style="font-size: 1.4em;">{% if voter.vote_hash %}{{voter.vote_hash}} <span style="font-size:0.8em;">[<a href="{% url "shortcut@vote" vote_tinyhash=voter.vote_tinyhash %}">ver</a>]</span>{% else %}&mdash;{% endif %}</tt></td>
 </tr>
 {% endfor %}
 </table>

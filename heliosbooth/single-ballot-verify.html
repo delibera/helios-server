@@ -54,11 +54,11 @@ function result_append(str) {
 function verify_single_ballot(election_url, audit_trail) {
   var encrypted_vote_json = jQuery.secureEvalJSON(audit_trail);
   
-  result_append("loading election...");
+  result_append("cargando elecciones...");
 
   // quick and dirty detection of cast ballot
   if (encrypted_vote_json['cast_at']) {
-    result_append("\n\nIt looks like you are trying to verify a cast ballot. That can't be done, only audited ballots can be verified.");
+    result_append("\n\nParece que estás intentando verificar un voto emitido. Eso no se puede hacer, solo las papeletas auditadas pueden ser verificadas.");
     return;
   }
   
@@ -70,9 +70,9 @@ function verify_single_ballot(election_url, audit_trail) {
     $('#loading').hide();
     
     if (overall_result) {
-       result_append('SUCCESSFUL VERIFICATION, DONE!');
+       result_append('VERIFICACIÓN EXITOSA, ¡HECHO!');
     } else {
-       result_append('PROBLEM - THIS BALLOT DOES NOT VERIFY.');        
+       result_append('PROBLEMA - ESTA PAPELETA NO SE VERIFICA.');        
     }
   };
 
@@ -97,11 +97,11 @@ function verify_single_ballot(election_url, audit_trail) {
       after_computation(overall_result);
     }
   }, error: function() {
-      result_append('PROBLEM LOADING election. Are you sure you have the right election URL?<br />');
+      result_append('PROBLEMA CARGANDO las elecciones. Estás seguro de que tienes la URL correcta?<br />');
 
       $('#loading').hide();
       
-      result_append('PROBLEM - THIS BALLOT DOES NOT VERIFY.');        
+      result_append('PROBLEMA - ESTA PAPELETA NO SE VERIFICA.');        
   }
   });
 }
