@@ -67,7 +67,7 @@ Prior Bulk Uploads:
 {% else %}
 {{vf.voter_file_content|length}}
 {% endif %}
- bytes, at {{vf.uploaded_at}}:
+ bytes, el {{vf.uploaded_at}}:
 {% if vf.processing_finished_at %}
 <em>procesado finalizado: {{vf.num_voters}} votantes cargados</em>
 {% else %}
