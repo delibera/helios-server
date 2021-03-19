@@ -45,7 +45,7 @@ def get_user_info_after_auth(request):
   email = id_token['email']
 
   # get the nice name
-  http = httplib2.Http(".cache")
+  http = httplib2.Http()
   http = credentials.authorize(http)
   (resp_headers, content) = http.request("https://people.googleapis.com/v1/people/me?personFields=names", "GET")
 

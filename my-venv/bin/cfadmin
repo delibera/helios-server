@@ -1,4 +1,4 @@
-#!/home/ruben/Documentos/heroku/helios-server/my-venv/bin/python3
+#!/var/www/html/helios-server/my-venv/bin/python3
 # Author: Chris Moyer
 #
 # cfadmin is similar to sdbadmin for CloudFront, it's a simple

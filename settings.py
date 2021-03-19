@@ -1,14 +1,19 @@
-
 # a massive hack to see if we're testing, in which case we use different settings
 import sys
 
 import json
 import os
 
-TESTING = 'test' in sys.argv
+import environ
 
-CELERY_BROKER_URL = os.environ['CLOUDAMQP_URL']
-BROKER_URL = os.environ['CLOUDAMQP_URL']
+# Read in secrets from .env file
+env = environ.Env()
+environ.Env.read_env()  
+DBPWD = env('DBPWD')
+GOOGLESECRET = env('GOOGLESECRET')
+GOOGLEID = env('GOOGLEID')
+
+TESTING = 'test' in sys.argv
 
 # go through environment variables and override them
 def get_from_env(var, default):
@@ -39,18 +44,18 @@ SHOW_LOGIN_OPTIONS = (get_from_env('SHOW_LOGIN_OPTIONS', '1') == '1')
 SHOW_USER_INFO = (get_from_env('SHOW_USER_INFO', '1') == '1')
 
 DATABASES = {
-  'default': {
-      'ENGINE': 'django.db.backends.postgresql_psycopg2',
-      'NAME': 'helios',
-      'CONN_MAX_AGE': 600,
-  },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'helios',
+        'CONN_MAX_AGE': 600,
+    },
 }
 
 # override if we have an env variable
 if get_from_env('DATABASE_URL', None):
-  import dj_database_url
-  DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-  DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -61,14 +66,13 @@ TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
-USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -91,8 +95,7 @@ SECRET_KEY = get_from_env('SECRET_KEY', 'replaceme')
 # If in production, you got a bad request (400) error
 #More info: https://docs.djangoproject.com/en/1.7/ref/settings/#allowed-hosts (same for 1.6)
 
-ALLOWED_HOSTS = get_from_env('ALLOWED_HOSTS', 'localhost').split(",")
-ALLOWED_HOSTS = ['votacitizink.herokuapp.com']
+ALLOWED_HOSTS = get_from_env('ALLOWED_HOSTS', 'vota.citizink.com').split(",")
 
 # Secure Stuff
 if get_from_env('SSL', '0') == '1':
@@ -165,9 +168,7 @@ INSTALLED_APPS = (
 ##
 ## HELIOS
 ##
-LOCALE_PATHS = (
-    os.path.join(ROOT_PATH, 'locale'),
-)
+
 
 MEDIA_ROOT = ROOT_PATH + "media/"
 
@@ -176,8 +177,8 @@ VOTER_UPLOAD_REL_PATH = "voters/%Y/%m/%d"
 
 
 # Change your email settings
-DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'ben@adida.net')
-DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Ben for Helios')
+DEFAULT_FROM_EMAIL = get_from_env('DEFAULT_FROM_EMAIL', 'rubencruz@delibera.es')
+DEFAULT_FROM_NAME = get_from_env('DEFAULT_FROM_NAME', 'Citizink')
 SERVER_EMAIL = '%s <%s>' % (DEFAULT_FROM_NAME, DEFAULT_FROM_EMAIL)
 
 LOGIN_URL = '/auth/'
@@ -185,8 +186,7 @@ LOGOUT_ON_CONFIRMATION = True
 
 # The two hosts are here so the main site can be over plain HTTP
 # while the voting URLs are served over SSL.
-# URL_HOST = get_from_env("URL_HOST", "http://localhost:8000").rstrip("/")
-URL_HOST = get_from_env("URL_HOST", "https://votacitizink.herokuapp.com").rstrip("/")
+URL_HOST = get_from_env("URL_HOST", "http://vota.citizink.com").rstrip("/")
 
 # IMPORTANT: you should not change this setting once you've created
 # elections, as your elections' cast_url will then be incorrect.
@@ -202,7 +202,7 @@ ALLOW_ELECTION_INFO_URL = (get_from_env('ALLOW_ELECTION_INFO_URL', '0') == '1')
 FOOTER_LINKS = json.loads(get_from_env('FOOTER_LINKS', '[]'))
 FOOTER_LOGO_URL = get_from_env('FOOTER_LOGO_URL', None)
 
-WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "Este es el mensaje predeterminado")
+WELCOME_MESSAGE = get_from_env('WELCOME_MESSAGE', "This is the default message")
 
 HELP_EMAIL_ADDRESS = get_from_env('HELP_EMAIL_ADDRESS', 'help@heliosvoting.org')
 
@@ -222,10 +222,9 @@ AUTH_ENABLED_SYSTEMS = get_from_env('AUTH_ENABLED_SYSTEMS',
                                     ).split(",")
 AUTH_DEFAULT_SYSTEM = get_from_env('AUTH_DEFAULT_SYSTEM', get_from_env('AUTH_DEFAULT_AUTH_SYSTEM', None))
 
-
 # google
-GOOGLE_CLIENT_ID = os.environ['GOOGLEID']
-GOOGLE_CLIENT_SECRET = os.environ['GOOGLESECRET']
+GOOGLE_CLIENT_ID = get_from_env('GOOGLE_CLIENT_ID', GOOGLEID)
+GOOGLE_CLIENT_SECRET = get_from_env('GOOGLE_CLIENT_SECRET', GOOGLESECRET)
 
 # facebook
 FACEBOOK_APP_ID = get_from_env('FACEBOOK_APP_ID','')
@@ -256,11 +255,14 @@ CLEVER_CLIENT_ID = get_from_env('CLEVER_CLIENT_ID', "")
 CLEVER_CLIENT_SECRET = get_from_env('CLEVER_CLIENT_SECRET', "")
 
 # email server
-EMAIL_HOST = os.environ['MAILGUN_SMTP_SERVER']
-EMAIL_HOST_USER = os.environ['MAILGUN_SMTP_LOGIN']
-EMAIL_HOST_PASSWORD = os.environ['MAILGUN_SMTP_PASSWORD']
+SENDGRID_API_KEY='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'
+
+EMAIL_HOST = 'ssl0.ovh.net'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'rubencruz@delibera.es'
+EMAIL_HOST_PASSWORD = 'Ruben100%participativo'
 EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # to use AWS Simple Email Service
 # in which case environment should contain
@@ -277,7 +279,7 @@ logging.basicConfig(
 )
 
 # set up celery
-# CELERY_BROKER_URL = get_from_env('CELERY_BROKER_URL', 'amqp://localhost')
+CELERY_BROKER_URL = get_from_env('CELERY_BROKER_URL', 'amqp://localhost')
 if TESTING:
     CELERY_TASK_ALWAYS_EAGER = True
 #database_url = DATABASES['default']
@@ -291,3 +293,22 @@ if ROLLBAR_ACCESS_TOKEN:
     'access_token': ROLLBAR_ACCESS_TOKEN,
     'environment': 'development' if DEBUG else 'production',  
   }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

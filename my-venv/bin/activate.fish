@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/ruben/Documentos/heroku/helios-server/my-venv"
+set -gx VIRTUAL_ENV "/var/www/html/helios-server/my-venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
@@ -52,7 +52,7 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
         set -l old_status $status
 
         # Prompt override?
-        if test -n "(my-venv) "            
+        if test -n "(my-venv) "
             printf "%s%s" "(my-venv) " (set_color normal)
         else
             # ...Otherwise, prepend env

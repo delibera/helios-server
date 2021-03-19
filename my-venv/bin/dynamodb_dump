@@ -1,4 +1,4 @@
-#!/home/ruben/Documentos/heroku/helios-server/my-venv/bin/python3
+#!/var/www/html/helios-server/my-venv/bin/python3
 
 import argparse
 import errno

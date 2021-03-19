@@ -1,4 +1,4 @@
-#!/home/ruben/Documentos/heroku/helios-server/my-venv/bin/python3
+#!/var/www/html/helios-server/my-venv/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
