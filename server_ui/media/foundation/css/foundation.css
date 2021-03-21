@@ -3082,14 +3082,14 @@ label.error {
         .top-bar-section ul li .js-generated {
           display: none; }
     .top-bar-section li.hover > a:not(.button) {
-      background: black;
+      background: #55aa00;
       color: white; }
     .top-bar-section li a:not(.button) {
       padding: 0 15px;
       line-height: 45px;
       background: #8bc34a; }
       .top-bar-section li a:not(.button):hover {
-        background: black; }
+        background: #55aa00; }
     .top-bar-section .has-dropdown > a {
       padding-right: 35px !important; }
       .top-bar-section .has-dropdown > a:after {
