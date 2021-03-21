@@ -2847,7 +2847,7 @@ label.error {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background: #111111;
+  background: #8bc34a;
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -2978,7 +2978,7 @@ label.error {
     background: black;
     color: white; }
   .top-bar-section ul li.active > a {
-    background: #090909;
+    background: #557733;
     color: white; }
   .top-bar-section .has-form {
     padding: 15px; }
@@ -3038,7 +3038,7 @@ label.error {
 
 @media only screen and (min-width: 940px) {
   .top-bar {
-    background: #111111;
+    background: #8bc34a;
     *zoom: 1;
     overflow: visible; }
     .top-bar:before, .top-bar:after {
@@ -3087,7 +3087,7 @@ label.error {
     .top-bar-section li a:not(.button) {
       padding: 0 15px;
       line-height: 45px;
-      background: #111111; }
+      background: #8bc34a; }
       .top-bar-section li a:not(.button):hover {
         background: black; }
     .top-bar-section .has-dropdown > a {
